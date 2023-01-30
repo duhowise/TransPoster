@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace TransPorter.Mvc.Data
+namespace TransPoster.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
