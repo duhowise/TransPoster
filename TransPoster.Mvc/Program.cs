@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using TransPorter.Mvc.Data;
+using TransPoster.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

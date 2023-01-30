@@ -15,4 +15,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TransPoster.Data\TransPoster.Data.csproj" />
+  </ItemGroup>
+
 </Project>
