@@ -7,6 +7,8 @@
     <UserSecretsId>aspnet-TransPorter.Mvc-333f0c5c-6560-4ef4-b4f7-3538e0e087c4</UserSecretsId>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="7.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.2" />
@@ -22,6 +24,10 @@
 
   <ItemGroup>
     <Folder Include="Extensions\" />
+    <Folder Include="Views\Roles\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Views\Roles\" />
+  </ItemGroup>
 </Project>

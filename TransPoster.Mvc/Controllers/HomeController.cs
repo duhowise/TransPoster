@@ -15,6 +15,7 @@ namespace TransPorter.Mvc.Controllers
 
         public IActionResult Index()
         {
+            // return LocalRedirect("/Identity/Account/Login");
             return View();
         }
 
