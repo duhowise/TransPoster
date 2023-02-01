@@ -7,6 +7,7 @@ public static class ServicesExtension
     public static IServiceCollection AddServices(this IServiceCollection services)
     {
         services.AddTransient<IAuthService, AuthService>();
+        services.AddTransient<IRoleService, RoleService>();
 
         return services;
     }
