@@ -1,9 +1,6 @@
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TransPoster.Data;
-using TransPoster.Data.Models;
 using TransPoster.Mvc.Extensions;
-using TransPoster.Mvc.Validators.Auth;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +11,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddIdentitySetup();
+builder.Services.AddServices();
 
 builder.Services.AddControllersWithViews();
 

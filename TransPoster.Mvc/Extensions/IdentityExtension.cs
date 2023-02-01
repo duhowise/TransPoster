@@ -16,6 +16,9 @@ public static class IdentityExtension
             options.Password.RequireUppercase = true;
             options.Password.RequiredLength = 7;
 
+            options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromHours(2);
+            options.Lockout.MaxFailedAccessAttempts = 5;
+
             options.SignIn.RequireConfirmedAccount = true;
         })
             .AddEntityFrameworkStores<ApplicationDbContext>()
