@@ -15,7 +15,7 @@ public class AuthService : IAuthService
     public async Task<bool> UnlockUserAsync(string id)
     {
         var user = await _userManager.FindByIdAsync(id);
-
+        if (user == null) return false;       
         var enabled = await _userManager.SetLockoutEnabledAsync(user, false);
 
         var endDateSet = await _userManager.SetLockoutEndDateAsync(user, DateTime.Now - TimeSpan.FromMinutes(1));
