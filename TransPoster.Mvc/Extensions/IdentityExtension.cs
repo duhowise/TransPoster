@@ -1,4 +1,5 @@
-﻿using TransPoster.Data;
+﻿using Microsoft.AspNetCore.Identity;
+using TransPoster.Data;
 using TransPoster.Data.Models;
 using TransPoster.Mvc.Validators.Auth;
 
@@ -21,6 +22,7 @@ public static class IdentityExtension
 
             options.SignIn.RequireConfirmedAccount = true;
         })
+            .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddPasswordValidator<ReplacePasswordValidator>();
 
