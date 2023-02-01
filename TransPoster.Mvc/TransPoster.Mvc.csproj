@@ -13,6 +13,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.2" />
+    <PackageReference Include="Quartz.AspNetCore" Version="3.6.0" />
   </ItemGroup>
 
   <ItemGroup>
