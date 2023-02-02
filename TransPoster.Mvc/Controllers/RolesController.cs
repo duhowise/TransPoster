@@ -29,7 +29,7 @@ namespace TransPoster.Mvc.Controllers
         {
             if (!ModelState.IsValid) return View();
             var role = await _roleService.CreateAsync(model);
-            return Created("/Roles", role);
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Edit(string id)
