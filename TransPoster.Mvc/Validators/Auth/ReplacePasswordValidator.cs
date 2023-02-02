@@ -5,9 +5,9 @@ namespace TransPoster.Mvc.Validators.Auth;
 
 public class ReplacePasswordValidator : IPasswordValidator<ApplicationUser>
 {
-    public Task<IdentityResult> ValidateAsync(UserManager<ApplicationUser> manager, ApplicationUser user, string password)
+    public Task<IdentityResult> ValidateAsync(UserManager<ApplicationUser> manager, ApplicationUser user, string? password)
     {
-        if (user.PasswordUpdatedAt < DateTime.Now.AddDays(-180))
+        if (user.PasswordUpdatedAt.HasValue && user.PasswordUpdatedAt < DateTime.Now.AddDays(-180))
         {
             return Task.FromResult(IdentityResult.Failed(new IdentityError
             {

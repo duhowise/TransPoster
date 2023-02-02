@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using TransPorter.Mvc.Models.Roles;
+﻿using Microsoft.AspNetCore.Mvc;
+using TransPoster.Mvc.Models.Roles;
 using TransPoster.Mvc.Services;
 
 namespace TransPoster.Mvc.Controllers
@@ -32,7 +28,7 @@ namespace TransPoster.Mvc.Controllers
         {
             if (!ModelState.IsValid) return View();
             var role = await _roleService.CreateAsync(model);
-            return Created("/Roles/", role);
+            return Created("/Roles", role);
         }
     }
 }

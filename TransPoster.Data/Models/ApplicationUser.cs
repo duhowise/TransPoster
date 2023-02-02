@@ -8,7 +8,7 @@ public class ApplicationUser : IdentityUser
 
     public bool IsActive { get; set; }
 
-    public DateTime PasswordUpdatedAt { get; set; }
+    public DateTime? PasswordUpdatedAt { get; set; }
 
     public ICollection<UserHistory> UserHistory { get; set; }
 }

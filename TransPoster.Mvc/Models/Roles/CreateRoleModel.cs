@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TransPorter.Mvc.Models.Roles;
+namespace TransPoster.Mvc.Models.Roles;
 
 public class CreateRoleModel
 {

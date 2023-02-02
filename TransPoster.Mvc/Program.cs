@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using TransPoster.Data;
 using TransPoster.Mvc.Extensions;
-using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +16,9 @@ builder.Services.AddServices();
 builder.Services.AddQuartzSetup();
 
 builder.Services.AddControllersWithViews();
+
+var context = builder.Services.BuildServiceProvider().GetRequiredService<ApplicationDbContext>();
+await context.Database.MigrateAsync();
 
 var app = builder.Build();
 
@@ -44,4 +46,4 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
 
-app.Run();
+await app.RunAsync();

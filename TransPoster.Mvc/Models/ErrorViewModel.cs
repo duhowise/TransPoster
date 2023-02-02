@@ -1,4 +1,4 @@
-namespace TransPorter.Mvc.Models
+namespace TransPoster.Mvc.Models
 {
     public class ErrorViewModel
     {

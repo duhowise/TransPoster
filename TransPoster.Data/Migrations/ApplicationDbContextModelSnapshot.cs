@@ -8,7 +8,7 @@ using TransPoster.Data;
 
 #nullable disable
 
-namespace TransPorter.Data.Migrations
+namespace TransPoster.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -178,6 +178,12 @@ namespace TransPorter.Data.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastLogin")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -195,7 +201,7 @@ namespace TransPorter.Data.Migrations
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("PasswordUpdatedAt")
+                    b.Property<DateTime?>("PasswordUpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("PhoneNumber")

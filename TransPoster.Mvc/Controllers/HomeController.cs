@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-using TransPorter.Mvc.Models;
+﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
+using TransPoster.Mvc.Models;
 
-namespace TransPorter.Mvc.Controllers
+namespace TransPoster.Mvc.Controllers
 {
     public class HomeController : Controller
     {
@@ -15,8 +15,12 @@ namespace TransPorter.Mvc.Controllers
 
         public IActionResult Index()
         {
+            if (User.Identity is { IsAuthenticated: true })
+            {
+                return View();
+
+            }
             return LocalRedirect("/Identity/Account/Login");
-           // return View();
         }
 
         public IActionResult Privacy()

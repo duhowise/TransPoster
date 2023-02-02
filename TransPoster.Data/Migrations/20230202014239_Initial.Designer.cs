@@ -9,11 +9,11 @@ using TransPoster.Data;
 
 #nullable disable
 
-namespace TransPorter.Data.Migrations
+namespace TransPoster.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230201060005_UpdateIdentityUserData")]
-    partial class UpdateIdentityUserData
+    [Migration("20230202014239_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -181,6 +181,12 @@ namespace TransPorter.Data.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastLogin")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -198,7 +204,7 @@ namespace TransPorter.Data.Migrations
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("PasswordUpdatedAt")
+                    b.Property<DateTime?>("PasswordUpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("PhoneNumber")
@@ -246,14 +252,13 @@ namespace TransPorter.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserHistory");
+                    b.ToTable("UserHistories");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -311,9 +316,7 @@ namespace TransPorter.Data.Migrations
                 {
                     b.HasOne("TransPoster.Data.Models.ApplicationUser", "User")
                         .WithMany("UserHistory")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("User");
                 });
