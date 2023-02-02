@@ -5,8 +5,10 @@ namespace TransPoster.Mvc.Services;
 
 public interface IRoleService
 {
-    public Task<IEnumerable<IdentityRole>> FindAllAsync();
-    public Task<IdentityRole?> CreateAsync(CreateRoleModel createRoleModel);
-
-    public Task<IdentityRole?> FindByName(string name);
+    Task<IEnumerable<IdentityRole>> FindAllAsync();
+    Task<IdentityRole?> CreateAsync(CreateRoleModel createRoleModel);
+    Task<IdentityRole> UpdateRoleAsync(string id, IdentityRole identityRole);
+    Task<IdentityRole?> GetIdentityRoleAsync(string id);
+    Task DeleteRoleAsync(string id);
+    Task<IdentityRole?> FindByName(string name);
 }
