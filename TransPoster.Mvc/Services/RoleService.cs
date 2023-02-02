@@ -31,4 +31,6 @@ public class RoleService : IRoleService
 
         return await _roleManager.FindByNameAsync(createRoleModel.Name);
     }
+
+    public async Task<IdentityRole?> FindByName(string name) => await _roleManager.FindByNameAsync(name);
 }

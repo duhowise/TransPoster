@@ -7,4 +7,6 @@ public interface IRoleService
 {
     public Task<IEnumerable<IdentityRole>> FindAllAsync();
     public Task<IdentityRole?> CreateAsync(CreateRoleModel createRoleModel);
+
+    public Task<IdentityRole?> FindByName(string name);
 }

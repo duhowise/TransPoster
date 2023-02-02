@@ -1,3 +1,4 @@
+using AspNetCore.ReCaptcha;
 using Microsoft.EntityFrameworkCore;
 using TransPoster.Data;
 using TransPoster.Mvc.Extensions;
@@ -14,6 +15,13 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddIdentitySetup();
 builder.Services.AddServices();
 builder.Services.AddQuartzSetup();
+
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(60);//You can set Time   
+});
+builder.Services.AddReCaptcha(builder.Configuration.GetSection("ReCaptcha"));
 
 builder.Services.AddControllersWithViews();
 
@@ -38,6 +46,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseSession();
 
 app.UseAuthorization();
 
