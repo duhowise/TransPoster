@@ -18,7 +18,7 @@ public class UserService : IUserService
         _roleService = roleService;
     }
 
-    public async Task<IEnumerable<ApplicationUser>> FindAllUsersAsync() => await _userManager.Users.Include(u => u.Roles).ToListAsync();
+    public async Task<IEnumerable<ApplicationUser>> FindAllUsersAsync() => await _userManager.Users.ToListAsync();
 
     public async Task<ApplicationUser> CreateUserAsync(CreateUserModel body)
     {
