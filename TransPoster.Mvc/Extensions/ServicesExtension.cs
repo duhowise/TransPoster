@@ -9,7 +9,7 @@ public static class ServicesExtension
         services.AddTransient<IAuthService, AuthService>();
         services.AddTransient<IRoleService, RoleService>();
         services.AddTransient<IUserService, UserService>();
-
+        services.AddTransient<IDbManagementService, DbManagementService>();
 
         return services;
     }
