@@ -49,4 +49,5 @@ public class RoleService : IRoleService
 
         if (roleExist) throw new Exception($"{roleName} role already exists!");
     }
+    public async Task<IdentityRole?> FindByName(string name) => await _roleManager.FindByNameAsync(name);
 }
