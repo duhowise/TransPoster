@@ -11,4 +11,7 @@ public class ApplicationUser : IdentityUser
     public DateTime? PasswordUpdatedAt { get; set; }
 
     public ICollection<UserHistory> UserHistory { get; set; }
+
+    public ICollection<IdentityUserRole<string>> Roles { get; set; }
+
 }
