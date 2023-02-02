@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using TransPoster.Mvc.Models.Roles;
 using TransPoster.Mvc.Services;
 
@@ -18,17 +19,45 @@ namespace TransPoster.Mvc.Controllers
             return View(roles);
         }
 
-        public IActionResult CreateRole()
+        public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateRole(CreateRoleModel model)
+        public async Task<IActionResult> Create(CreateRoleModel model)
         {
             if (!ModelState.IsValid) return View();
             var role = await _roleService.CreateAsync(model);
             return Created("/Roles", role);
+        }
+
+        public IActionResult Edit(string id)
+        {
+            var role = _roleService.GetIdentityRoleAsync(id);
+            if (role is null) return RedirectToAction(nameof(Index));
+            return View(role);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit([FromRoute]string id, IdentityRole identityRole)
+        {
+            try
+            {
+                var result = await _roleService.UpdateRoleAsync(id, identityRole);
+                return Ok(result);
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(string id)
+        {
+            await _roleService.DeleteRoleAsync(id);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
