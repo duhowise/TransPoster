@@ -1,3 +1,21 @@
+:root {
+    --bg-deep-blue: #0081B4;
+    --dark-grey: #EEEEEE;
+}
+
+.bg-deep-blue {
+    background-color: var(--bg-deep-blue);
+}
+
+.bg-dark-grey {
+    background-color: var(--dark-grey);
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
 html {
   font-size: 14px;
 }
@@ -12,11 +30,17 @@ html {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+body {
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
 }
 
-body {
-  margin-bottom: 60px;
+#side-nav {
+  flex: 15%;
+
+}
+
+#main-content {
+  flex: 85%;
 }

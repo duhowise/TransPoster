@@ -4,6 +4,6 @@ namespace TransPorter.Mvc.Models.Roles;
 
 public class CreateRoleModel
 {
-    [Required]
+    [Required(ErrorMessage = "Role is required")]
     public string Name { get; set; }
 }
