@@ -28,6 +28,7 @@
 
   <ItemGroup>
     <Folder Include="Extensions\" />
+    <Folder Include="Models\Menu\" />
     <Folder Include="Views\Roles\" />
   </ItemGroup>
 

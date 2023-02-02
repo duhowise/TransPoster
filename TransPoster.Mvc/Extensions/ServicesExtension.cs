@@ -10,6 +10,7 @@ public static class ServicesExtension
         services.AddTransient<IRoleService, RoleService>();
         services.AddTransient<IUserService, UserService>();
         services.AddTransient<IDbManagementService, DbManagementService>();
+        services.AddTransient<IMenuService, MenuService>();
 
         return services;
     }
