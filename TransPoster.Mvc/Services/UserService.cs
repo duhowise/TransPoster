@@ -7,19 +7,13 @@ namespace TransPoster.Mvc.Services;
 
 public class UserService : IUserService
 {
-    private readonly IUserStore<ApplicationUser> _userStore;
-    private readonly IUserEmailStore<ApplicationUser> _emailStore;
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly IRoleService _roleService;
 
     public UserService(
-        IUserStore<ApplicationUser> userStore,
-        IUserEmailStore<ApplicationUser> emailStore,
         UserManager<ApplicationUser> userManager,
         IRoleService roleService)
     {
-        _userStore = userStore;
-        _emailStore = emailStore;
         _userManager = userManager;
         _roleService = roleService;
     }
@@ -31,10 +25,11 @@ public class UserService : IUserService
         var role = await _roleService.FindByName(body.Role);
         if (role is null) throw new Exception("Role does not exist");
 
-        var user = new ApplicationUser();
-
-        await _userStore.SetUserNameAsync(user, body.UserName, CancellationToken.None);
-        await _emailStore.SetEmailAsync(user, body.Email, CancellationToken.None);
+        var user = new ApplicationUser
+        {
+            UserName = body.UserName,
+            Email = body.Email
+        };
 
         var result = await _userManager.CreateAsync(user, body.Password);
 
