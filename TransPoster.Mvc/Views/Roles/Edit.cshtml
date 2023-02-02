@@ -1,21 +1,21 @@
-﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
-@model TransPoster.Mvc.Models.Roles.CreateRoleModel
+﻿
+@model IdentityRole
 @{
-    ViewData["Title"] = @Localizer["CreateRole"];
+    ViewData["Title"] = "Update Role";
 }
 <div class="container mx-auto w-50 mt-5">
-    <form class="card card-body" method="post" asp-controller="Roles" asp-action="CreateRole">
+    <form class="card card-body" method="post" asp-controller="Roles" asp-action="Edit">
         <div class="form-floating mb-3">
             <input asp-for="Name" class="form-control form-control-sm" autocomplete="Name" aria-required="true" placeholder="" />
             <label asp-for="Name" class="form-label">Name of role</label>
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
         <div>
-            <button id="create-role" type="submit" class="w-100 btn btn-info text-light">@Localizer["CreateRole"]</button>
+            <button id="edit-role" type="submit" class="w-100 btn btn-info text-light">Update Role</button>
         </div>
     </form>
     <div class="mt-2">
-       <a asp-action="/" class="btn btn-outline-secondary" asp-controller="Roles">Back to list</a>
+        <a asp-action="/" class="btn btn-outline-secondary" asp-controller="Roles">Back to list</a>
     </div>
 </div>
 @section Scripts {
