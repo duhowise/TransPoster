@@ -1,22 +1,26 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using TransPoster.Mvc.Models;
+using TransPoster.Mvc.Services;
 
 namespace TransPoster.Mvc.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IUserService _userService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger,IUserService userService)
         {
             _logger = logger;
+            _userService = userService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             if (User.Identity is { IsAuthenticated: true })
             {
+                var users =await _userService.FindAllUsersAsync();
                 return View();
 
             }

@@ -15,7 +15,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddIdentitySetup();
 builder.Services.AddServices();
 builder.Services.AddQuartzSetup();
-
+builder.Services.AddLocalizationSetup();
 
 builder.Services.AddSession(options =>
 {
@@ -23,7 +23,7 @@ builder.Services.AddSession(options =>
 });
 builder.Services.AddReCaptcha(builder.Configuration.GetSection("ReCaptcha"));
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddViewLocalization();
 
 var context = builder.Services.BuildServiceProvider().GetRequiredService<ApplicationDbContext>();
 await context.Database.MigrateAsync();
