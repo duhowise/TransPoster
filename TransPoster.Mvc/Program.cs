@@ -17,8 +17,8 @@ builder.Services.AddQuartzSetup();
 
 builder.Services.AddControllersWithViews();
 
-//var context = builder.Services.BuildServiceProvider().GetRequiredService<ApplicationDbContext>();
-//await context.Database.MigrateAsync();
+var context = builder.Services.BuildServiceProvider().GetRequiredService<ApplicationDbContext>();
+await context.Database.MigrateAsync();
 
 var app = builder.Build();
 
