@@ -14,6 +14,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddIdentitySetup();
 builder.Services.AddServices();
+builder.Services.AddQuartzSetup();
 
 builder.Services.AddControllersWithViews();
 

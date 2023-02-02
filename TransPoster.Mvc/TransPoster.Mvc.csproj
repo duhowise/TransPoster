@@ -16,6 +16,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.3" />
+    <PackageReference Include="Quartz.AspNetCore" Version="3.6.0" />
+    <PackageReference Include="Quartz" Version="3.6.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,9 +27,11 @@
   <ItemGroup>
     <Folder Include="Extensions\" />
     <Folder Include="Views\Roles\" />
+    <Folder Include="Models\Roles\" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="Views\Roles\" />
+    <None Remove="Quartz" />
   </ItemGroup>
 </Project>

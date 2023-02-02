@@ -9,6 +9,8 @@ public class ApplicationUserConfiguration : IEntityTypeConfiguration<Application
     public void Configure(EntityTypeBuilder<ApplicationUser> builder)
     {
         builder.Property(e => e.PasswordUpdatedAt).HasDefaultValueSql("getdate()");
+        builder.Property(e => e.IsActive).HasDefaultValue(true);
+
 
         builder.HasMany(au => au.UserHistory)
             .WithOne(uh => uh.User);
