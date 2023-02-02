@@ -3,6 +3,7 @@
 #nullable disable
 
 using System.ComponentModel.DataAnnotations;
+using AspNetCore.ReCaptcha;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,7 @@ namespace TransPoster.Mvc.Areas.Identity.Pages.Account
 {
     public class LoginModel : PageModel
     {
+        private const string LoginAttemptsSessionName = "_LoginAttempts";
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
@@ -40,6 +42,11 @@ namespace TransPoster.Mvc.Areas.Identity.Pages.Account
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
         public string ReturnUrl { get; set; }
+
+        /// <summary>
+        ///    The number of login attempts
+        /// </summary>
+        public int LoginAttempts { get; set; }
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -85,6 +92,8 @@ namespace TransPoster.Mvc.Areas.Identity.Pages.Account
                 ModelState.AddModelError(string.Empty, ErrorMessage);
             }
 
+            LoginAttempts = HttpContext.Session.GetInt32(LoginAttemptsSessionName) ?? 0;
+
             returnUrl ??= Url.Content("~/");
 
             // Clear the existing external cookie to ensure a clean login process
@@ -95,11 +104,13 @@ namespace TransPoster.Mvc.Areas.Identity.Pages.Account
             ReturnUrl = returnUrl;
         }
 
+        [ValidateReCaptcha]
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            var loginAttempts = HttpContext.Session.GetInt32(LoginAttemptsSessionName) ?? 0;
 
             if (ModelState.IsValid)
             {
@@ -122,11 +133,14 @@ namespace TransPoster.Mvc.Areas.Identity.Pages.Account
                 }
                 else
                 {
+                    HttpContext.Session.SetInt32(LoginAttemptsSessionName, loginAttempts + 1);
+
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
                     return Page();
                 }
             }
 
+            HttpContext.Session.SetInt32(LoginAttemptsSessionName, loginAttempts + 1);
             // If we got this far, something failed, redisplay form
             return Page();
         }
