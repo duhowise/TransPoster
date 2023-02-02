@@ -43,4 +43,22 @@ public class UserService : IUserService
         var error = result.Errors.ToList().First();
         throw new Exception(error.Description);
     }
+
+    public async Task<ApplicationUser> AddRoleToUser(CreateUserModel body)
+    {
+        var role = await _roleService.FindByName(body.Role);
+        if (role is null) throw new Exception("Role does not exist");
+
+        var user = new ApplicationUser();
+
+        await _userStore.SetUserNameAsync(user, body.UserName, CancellationToken.None);
+        await _emailStore.SetEmailAsync(user, body.Email, CancellationToken.None);
+
+        var result = await _userManager.CreateAsync(user, body.Password);
+
+        if (result.Succeeded) return user;
+
+        var error = result.Errors.ToList().First();
+        throw new Exception(error.Description);
+    }
 }
