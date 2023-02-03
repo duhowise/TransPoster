@@ -5,27 +5,31 @@ using TransPoster.Mvc.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Configuration.AddJsonFile("appsettings.secret.json", optional: true, reloadOnChange: false);
+
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
+
+var services = builder.Services;
+services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddIdentitySetup();
-builder.Services.AddServices();
-builder.Services.AddQuartzSetup();
-builder.Services.AddLocalizationSetup();
+services.AddIdentitySetup();
+services.AddServices();
+services.AddQuartzSetup();
+services.AddLocalizationSetup();
 
-builder.Services.AddSession(options =>
+services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(60);//You can set Time   
 });
-builder.Services.AddReCaptcha(builder.Configuration.GetSection("ReCaptcha"));
+services.AddReCaptcha(builder.Configuration.GetSection("ReCaptcha"));
 
-builder.Services.AddControllersWithViews().AddViewLocalization();
+services.AddControllersWithViews().AddViewLocalization();
 
-var context = builder.Services.BuildServiceProvider().GetRequiredService<ApplicationDbContext>();
+var context = services.BuildServiceProvider().GetRequiredService<ApplicationDbContext>();
 await context.Database.MigrateAsync();
 
 var app = builder.Build();
