@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using TransPoster.Data.Models;
 using TransPoster.Mvc.Models.Roles;
 using TransPoster.Mvc.Services;
 
@@ -40,7 +41,7 @@ namespace TransPoster.Mvc.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit([FromRoute]string id, IdentityRole identityRole)
+        public async Task<IActionResult> Edit([FromRoute]string id, ApplicationRole identityRole)
         {
             try
             {
