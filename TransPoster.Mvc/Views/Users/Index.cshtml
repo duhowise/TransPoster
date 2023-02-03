@@ -4,7 +4,7 @@
 }
 <div class="container p-2">
     <div class="col-sm-3 mb-3 btn-toolbar" role="toolbar">
-        <a type="button" href="@Url.ActionLink("Create","Roles")" class="btn btn-success">
+        <a type="button" href="@Url.ActionLink("Create","Users")" class="btn text-light btn-info btn-sm">
             <i class="bi-person-plus-fill"></i>&nbsp;Create New User
         </a>
     </div>
@@ -25,11 +25,11 @@
                     <td>
                         <div class="btn-toolbar d-flex justify-content-end" role="toolbar">
                             <div class="btn-group" role="group">
-                                <a href="/Users/Edit/@user.Id" class="btn btn-secondary text-light">
-                                    <i class="pencil-square"></i>
+                                <a href="/Users/Edit/@user.Id" class="btn btn-secondary btn-sm text-light">
+                                    <i class="bi-pencil-square"></i>
                                 </a>
-                                <a href="/Users/Delete/@user.Id" class="btn btn-danger text-light">
-                                    <i class="trash-fill"></i>
+                                <a href="/Users/Delete/@user.Id" class="btn btn-danger btn-sm text-light">
+                                    <i class="bi-trash-fill"></i>
                                 </a>
                             </div>
                         </div>

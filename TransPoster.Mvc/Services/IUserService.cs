@@ -10,4 +10,5 @@ public interface IUserService
     public Task<ApplicationUser> CreateUserAsync(CreateUserModel body);
 
     public Task AddRoleToUser(AddRoleToUserModel body);
+    Task<ApplicationUser?> FindByIdAsync(string id);
 }
