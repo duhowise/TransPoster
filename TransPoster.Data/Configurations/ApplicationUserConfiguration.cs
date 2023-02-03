@@ -8,6 +8,7 @@ public class ApplicationUserConfiguration : IEntityTypeConfiguration<Application
 {
     public void Configure(EntityTypeBuilder<ApplicationUser> builder)
     {
+        builder.HasKey(u => u.Id);
         builder.Property(e => e.PasswordUpdatedAt).HasDefaultValueSql("getdate()");
         builder.Property(e => e.IsActive).HasDefaultValue(true);
 
