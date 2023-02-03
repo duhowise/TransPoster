@@ -29,9 +29,6 @@ services.AddReCaptcha(builder.Configuration.GetSection("ReCaptcha"));
 
 services.AddControllersWithViews().AddViewLocalization();
 
-var context = services.BuildServiceProvider().GetRequiredService<ApplicationDbContext>();
-await context.Database.MigrateAsync();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
