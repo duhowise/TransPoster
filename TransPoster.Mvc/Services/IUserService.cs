@@ -10,4 +10,6 @@ public interface IUserService
     public Task<ApplicationUser> CreateUserAsync(CreateUserModel body);
 
     public Task AddRoleToUser(AddRoleToUserModel body);
+
+    public Task RemoveRoleFromUserAsync(RemoveRoleFromUserModel body);
 }
