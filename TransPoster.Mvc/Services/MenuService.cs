@@ -10,14 +10,14 @@ public class MenuService : IMenuService
         {
             Name = "Users",
             Icon = "people-fill",
-            Url = "/Users",
+            Url = "Users",
             Children = new ()
             {
                 new MenuChildModel()
                 {
-                    Name = "Assign Role",
+                    Name = "Create Role",
                     Icon = "person-plus",
-                    Url = "/Users/AssignRole"
+                    Url = "Roles/Create"
                 }
             }
         },
@@ -25,7 +25,7 @@ public class MenuService : IMenuService
         {
             Name = "Roles",
             Icon = "person-badge-fill",
-            Url = "/Roles"
+            Url = "/"
         }
     };
 

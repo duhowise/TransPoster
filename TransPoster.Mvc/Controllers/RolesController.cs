@@ -33,9 +33,9 @@ namespace TransPoster.Mvc.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Edit(string id)
+        public async Task<IActionResult> Edit(string id)
         {
-            var role = _roleService.GetIdentityRoleAsync(id);
+            var role = await _roleService.GetIdentityRoleAsync(id);
             if (role is null) return RedirectToAction(nameof(Index));
             return View(role);
         }

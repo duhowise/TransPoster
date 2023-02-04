@@ -35,11 +35,11 @@ namespace TransPoster.Mvc.Controllers
         {
             var user = await _userService.FindByIdAsync(id);
             if (user is null) return NotFound();
-            var role = await _roleService.GetIdentityRoleAsync(user.Roles.FirstOrDefault()!.Id);
+            //var role = await _roleService.GetIdentityRoleAsync(user.Roles.FirstOrDefault()!.Id);
             return View(new EditUserModel
             {
                 Email = user.Email!,
-                Role = role!.Name!,
+                Role = "Member",
                 UserName = user.UserName!,
             });
         }
