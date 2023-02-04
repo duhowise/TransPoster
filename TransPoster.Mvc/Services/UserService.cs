@@ -45,4 +45,11 @@ public class UserService : IUserService
 
         await _userManager.AddToRoleAsync(user, body.Role);
     }
+
+    public async Task RemoveRoleFromUserAsync(RemoveRoleFromUserModel body)
+    {
+        var user = await _userManager.FindByIdAsync(body.UserId);
+
+        await _userManager.RemoveFromRoleAsync(user, body.Role);
+    }
 }
