@@ -11,6 +11,7 @@ public static class ServicesExtension
         services.AddTransient<IUserService, UserService>();
         services.AddTransient<IDbManagementService, DbManagementService>();
         services.AddTransient<IMenuService, MenuService>();
+        services.AddTransient(typeof(IDbModelsService<>), typeof(DbModelsService<>));
 
         return services;
     }
