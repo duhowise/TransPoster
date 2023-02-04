@@ -1,0 +1,44 @@
+﻿@model IEnumerable<IdentityRole>
+@{
+    ViewData["Title"] = "Roles";
+}
+@section Styles {
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.13.1/datatables.min.css" />
+}
+
+<div class="container p-2">
+    <div class="col-sm-1 mb-3">
+        <a type="button" href="@Url.ActionLink("Create","Roles")" class="btn btn-success">Create New Role</a>
+    </div>
+    <table id="roles-table" class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var role in Model)
+            {
+                <tr>
+                    <td>@role.Name</td>
+                    <td>
+                        <div class="btn-toolbar d-flex justify-content-end" role="toolbar">
+                            <div class="btn-group" role="group">
+                                <a href="/Roles/Edit/@role.Id" class="btn btn-secondary text-light">Edit</a>
+                                <a href="/Roles/Delete/@role.Id" class="btn btn-danger text-light">Delete</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@section Scripts {
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.13.1/datatables.min.js"></script>
+    <script>$('#roles-table').DataTable({
+        ordering: false
+    });</script>
+}
+

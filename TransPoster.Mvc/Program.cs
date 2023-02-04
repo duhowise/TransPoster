@@ -1,18 +1,33 @@
-using Microsoft.AspNetCore.Identity;
+using AspNetCore.ReCaptcha;
 using Microsoft.EntityFrameworkCore;
 using TransPoster.Data;
+using TransPoster.Mvc.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Configuration.AddJsonFile("appsettings.secret.json", optional: true, reloadOnChange: false);
+
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
-builder.Services.AddControllersWithViews();
+var services = builder.Services;
+services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(connectionString));
+
+services.AddDatabaseDeveloperPageExceptionFilter();
+
+services.AddIdentitySetup();
+services.AddServices();
+services.AddQuartzSetup();
+services.AddLocalizationSetup();
+
+services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(60);//You can set Time   
+});
+services.AddReCaptcha(builder.Configuration.GetSection("ReCaptcha"));
+
+services.AddControllersWithViews().AddViewLocalization();
 
 var app = builder.Build();
 
@@ -32,6 +47,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseSession();
 
 app.UseAuthorization();
 
@@ -40,4 +56,4 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
 
-app.Run();
+await app.RunAsync();
