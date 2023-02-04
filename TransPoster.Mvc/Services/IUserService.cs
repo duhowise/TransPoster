@@ -12,4 +12,5 @@ public interface IUserService
     public Task AddRoleToUser(AddRoleToUserModel body);
 
     public Task RemoveRoleFromUserAsync(RemoveRoleFromUserModel body);
+    Task<ApplicationUser?> FindByIdAsync(string id);
 }

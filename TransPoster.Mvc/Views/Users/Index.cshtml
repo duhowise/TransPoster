@@ -1,0 +1,47 @@
+﻿@model IEnumerable<ApplicationUser>
+@{
+    ViewData["Title"] = "Users";
+}
+<div class="container p-2">
+    <div class="col-sm-3 mb-3 btn-toolbar" role="toolbar">
+        <a type="button" href="@Url.ActionLink("Create","Users")" class="btn text-light btn-info btn-sm">
+            <i class="bi-person-plus-fill"></i>&nbsp;Create New User
+        </a>
+    </div>
+    <table id="users-table" class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.UserName</td>
+                    <td>@user.Email</td>
+                    <td>
+                        <div class="btn-toolbar d-flex justify-content-end" role="toolbar">
+                            <div class="btn-group" role="group">
+                                <a href="/Users/Edit/@user.Id" class="btn btn-secondary btn-sm text-light">
+                                    <i class="bi-pencil-square"></i>
+                                </a>
+                                <a href="/Users/Delete/@user.Id" class="btn btn-danger btn-sm text-light">
+                                    <i class="bi-trash-fill"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@section Scripts {
+    <script>$('#users-table').DataTable({
+            ordering: false
+        });</script>
+}
+

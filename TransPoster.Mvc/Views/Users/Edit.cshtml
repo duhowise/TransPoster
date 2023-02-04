@@ -1,0 +1,40 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model TransPoster.Mvc.Models.Users.EditUserModel
+@inject RoleManager<ApplicationRole> roleManager
+@{
+    ViewData["Title"] = "Edit user";
+    var roles = roleManager.Roles.ToList();
+}
+
+<div class="container mx-auto w-50 mt-5">
+    <form method="post" class="card card-body" asp-controller="Users" asp-action="Edit">
+        <div class="form-floating mb-3">
+            <input asp-for="UserName" class="form-control form-control-sm" autocomplete="Username" aria-required="true" placeholder="" />
+            <label asp-for="UserName" class="form-label">Username</label>
+            <span asp-validation-for="UserName" class="text-danger"></span>
+        </div>
+        <div class="form-floating mb-3">
+            <input asp-for="Email" class="form-control form-control-sm" autocomplete="Email" aria-required="true" placeholder="" />
+            <label asp-for="Email" class="form-label">Email</label>
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="form-floating mb-3">
+            <select class="form-control form-control-sm" asp-for="Role">
+                @foreach (var role in roles)
+                {
+                    <option value="@role?.Name">@role?.Name</option>
+                }
+            </select>
+            <label asp-for="Role" class="form-label">Role</label>
+            <span asp-validation-for="Role" class="text-danger"></span>
+        </div>
+        <div>
+            <button id="update-user" type="submit" class="w-100 btn btn-info text-light">
+                Update user &nbsp;<i class="bi-person-add"></i>
+            </button>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
