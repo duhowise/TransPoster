@@ -1,6 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
 @model TransPoster.Mvc.Models.Users.EditUserModel
-@inject RoleManager<ApplicationRole> roleManager
+@inject RoleManager<IdentityRole> roleManager
 @{
     ViewData["Title"] = "Edit user";
     var roles = roleManager.Roles.ToList();
