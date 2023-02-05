@@ -1,14 +1,14 @@
-﻿
-@{
+﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>Products</h1>
-
-<table model-type="typeof(TransPoster.Mvc.Data.Products.ProductViewModel)"
-       add-first-column="false"
-       class="table table-striped table-bordered table-hover dataTable"
-       id="products-table"></table>
+<div class="container-fluid">
+    <table model-type="typeof(TransPoster.Mvc.Data.Products.ProductViewModel)"
+           add-first-column="false"
+           class="table table-striped table-bordered table-hover dataTable"
+           id="products-table"></table>
+</div>
 
 @section Styles{
     <link rel="stylesheet" href="~/lib/bootstrap-multiselect/bootstrap-multiselect.css" />

@@ -46,4 +46,8 @@
     <None Include="wwwroot\lib\moment\moment-he.js" />
     <None Include="wwwroot\lib\moment\moment.js" />
   </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\DatabaseExplorer\Index.cshtml" />
+  </ItemGroup>
 </Project>
