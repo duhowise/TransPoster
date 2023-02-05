@@ -41,7 +41,7 @@ namespace TransPoster.Mvc.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit([FromRoute]string id, ApplicationRole identityRole)
+        public async Task<IActionResult> Edit([FromRoute]string id, IdentityRole identityRole)
         {
             try
             {

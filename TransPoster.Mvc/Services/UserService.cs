@@ -25,7 +25,9 @@ public class UserService : IUserService
         var user = new ApplicationUser
         {
             UserName = body.UserName,
-            Email = body.Email
+            Email = body.Email,
+            IsActive = true,
+            PasswordUpdatedAt = DateTime.Now
         };
 
         var result = await _userManager.CreateAsync(user, body.Password);

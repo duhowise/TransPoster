@@ -1,6 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
 @model TransPoster.Mvc.Models.Users.CreateUserModel
-@inject RoleManager<ApplicationRole> roleManager
+@inject RoleManager<IdentityRole> roleManager
 @{
     ViewData["Title"] = "Create user";
     var roles = roleManager.Roles.ToList();

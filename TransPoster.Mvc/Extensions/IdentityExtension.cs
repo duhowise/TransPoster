@@ -22,7 +22,7 @@ public static class IdentityExtension
 
             options.SignIn.RequireConfirmedAccount = true;
         })
-            .AddRoles<ApplicationRole>()
+            .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddPasswordValidator<ReplacePasswordValidator>();
 
