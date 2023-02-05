@@ -23,9 +23,9 @@ public class MenuService : IMenuService
         },
         new MenuParentModel()
         {
-            Name = "Roles",
+            Name = "Database",
             Icon = "person-badge-fill",
-            Url = "Roles"
+            Url = "/DataExplorer"
         }
     };
 
