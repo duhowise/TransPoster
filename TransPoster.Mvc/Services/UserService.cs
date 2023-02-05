@@ -18,7 +18,7 @@ public class UserService : IUserService
         _roleService = roleService;
     }
 
-    public async Task<IEnumerable<ApplicationUser>> FindAllUsersAsync() => await _userManager.Users.Include(u => u.Roles).ToListAsync();
+    public async Task<IEnumerable<ApplicationUser>> FindAllUsersAsync() => await _userManager.Users.Where(u => u.IsActive).Include(u => u.Roles).ToListAsync();
 
     public async Task<ApplicationUser> CreateUserAsync(CreateUserModel body)
     {
@@ -53,5 +53,16 @@ public class UserService : IUserService
 
         await _userManager.RemoveFromRoleAsync(user, body.Role);
     }
-    public async Task<ApplicationUser?> FindByIdAsync(string id) => await _userManager.Users.Include(_ => _.Roles).FirstOrDefaultAsync(_ => _.Id ==  id);
+    public async Task<ApplicationUser?> FindByIdAsync(string id) => await _userManager.Users.Include(_ => _.Roles).FirstOrDefaultAsync(_ => _.Id == id);
+
+    public async Task DeleteUserAsync(string id)
+    {
+        var user = await _userManager.FindByIdAsync(id);
+
+        if (user is null) throw new Exception("User does not exist!");
+
+        user.IsActive = false;
+
+        await _userManager.UpdateAsync(user);
+    }
 }

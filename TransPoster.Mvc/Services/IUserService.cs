@@ -13,4 +13,6 @@ public interface IUserService
 
     public Task RemoveRoleFromUserAsync(RemoveRoleFromUserModel body);
     Task<ApplicationUser?> FindByIdAsync(string id);
+
+    public Task DeleteUserAsync(string id);
 }
