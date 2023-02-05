@@ -25,7 +25,7 @@ public class MenuService : IMenuService
         {
             Name = "Database",
             Icon = "person-badge-fill",
-            Url = "/DataExplorer"
+            Url = "Products"
         }
     };
 

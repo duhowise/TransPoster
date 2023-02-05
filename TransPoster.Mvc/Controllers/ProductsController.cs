@@ -11,9 +11,9 @@ public sealed class ProductsController : Controller
 {
     public ViewResult Index() => View();
 
-    public async Task<JsonResult> IndexTable(AjaxDataRequest param, [FromServices] ProductViewModelProccesser proccesser)
+    public async Task<JsonResult> IndexTable(AjaxDataRequest param, [FromServices] ProductViewModelProccesser processor)
     {
-        var viewModels = await proccesser.ProccessAsync(param);
+        var viewModels = await processor.ProccessAsync(param);
         return this.JsonDefaultContract(viewModels);
 
     }
