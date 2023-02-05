@@ -8,16 +8,20 @@ public class MenuService : IMenuService
     {
         new MenuParentModel()
         {
-            Name = "Users",
+            Name = "User Management",
             Icon = "people-fill",
-            Url = "Users",
+            Url = "#",
             Children = new ()
             {
                 new MenuChildModel()
                 {
-                    Name = "Create Role",
-                    Icon = "person-plus",
-                    Url = "Roles/Create"
+                    Name = "Users",
+                    Url = "/Users"
+                },
+                new MenuChildModel()
+                {
+                    Name = "Roles",
+                    Url = "/Roles"
                 }
             }
         },
@@ -25,7 +29,15 @@ public class MenuService : IMenuService
         {
             Name = "Database",
             Icon = "person-badge-fill",
-            Url = "Products"
+            Url = "#",
+            Children = new ()
+            {
+                new MenuChildModel()
+                {
+                    Name = "Products",
+                    Url = "/Products"
+                },
+            }
         }
     };
 

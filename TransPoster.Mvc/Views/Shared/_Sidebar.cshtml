@@ -2,7 +2,7 @@
 @{
     bool SetDataActive(string url)
     {
-        return Context.Request.Path.Value == $"/{url}";
+        return Context.Request.Path.Value == url;
     }
 }
 <nav class="sidebar w-100 h-100">
