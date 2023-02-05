@@ -9,17 +9,23 @@ public class MenuService : IMenuService
         new MenuParentModel()
         {
             Name = "Users",
-            Icon = "users",
-            Url = "Url",
+            Icon = "people-fill",
+            Url = "Users",
             Children = new ()
             {
                 new MenuChildModel()
                 {
-                    Name = "Create",
+                    Name = "Create Role",
                     Icon = "person-plus",
-                    Url = "Users/Create"
+                    Url = "Roles/Create"
                 }
             }
+        },
+        new MenuParentModel()
+        {
+            Name = "Roles",
+            Icon = "person-badge-fill",
+            Url = "Roles"
         }
     };
 

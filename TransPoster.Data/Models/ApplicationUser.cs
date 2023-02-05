@@ -12,6 +12,6 @@ public class ApplicationUser : IdentityUser
 
     public ICollection<UserHistory> UserHistory { get; set; }
 
-    public ICollection<IdentityUserRole<string>> Roles { get; set; }
+    public ICollection<ApplicationRole> Roles { get; set; }
 
 }

@@ -1,0 +1,36 @@
+﻿@model List<TransPoster.Mvc.Models.Menu.MenuParentModel>
+@{
+    bool SetDataActive(string url)
+    {
+        return Context.Request.Path.Value == $"/{url}";
+    }
+}
+<nav class="sidebar w-100 h-100">
+    <ul class="nav flex-column" id="nav_accordion">
+        @foreach (var menu in Model)
+        {
+            string hasSubMenu = menu.Children.Any() ? "has-submenu" : "";
+            <li class="nav-item @hasSubMenu">
+                <a class="nav-link" data-active="@SetDataActive(menu.Url!)" href="@menu.Url">
+                    <i class="w-25 bi-people-fill"></i>
+                    <span class="w-75 text-left">@menu.Name</span>
+                    @if (!string.IsNullOrEmpty(hasSubMenu))
+                    {
+                        <i class="bi-chevron-down text-right toggle-icon"></i>
+                    }
+                </a>
+                @if (menu.Children.Any())
+                {
+                    <ul class="submenu collapse">
+                        @foreach (var submenu in menu.Children)
+                        {
+                            <li class="submenu-nav-item">
+                                <a data-active="@SetDataActive(submenu.Url)" class="nav-link" href="@submenu.Url">@submenu.Name</a>
+                            </li>
+                        }
+                    </ul>
+                }
+            </li>
+        }
+    </ul>
+</nav>

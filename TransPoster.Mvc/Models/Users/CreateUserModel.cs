@@ -2,7 +2,13 @@
 
 namespace TransPoster.Mvc.Models.Users;
 
-public class CreateUserModel
+public class CreateUserModel : EditUserModel
+{
+    [Required]
+    public string Password { get; set; }
+}
+
+public class EditUserModel
 {
     [Required]
     public string UserName { get; set; }
@@ -10,10 +16,6 @@ public class CreateUserModel
     [Required]
     [EmailAddress]
     public string Email { get; set; }
-
-
-    [Required]
-    public string Password { get; set; }
 
     [Required]
     public string Role { get; set; }
