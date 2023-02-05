@@ -17,7 +17,6 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
             new Order
             {
                 Id = 1,
-                Name = "First order",
                 OrderNo = "OR12344",
                 Delivered = true,
                 DeliveredAt = DateTime.Now.AddDays(10),
@@ -26,7 +25,6 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
             new Order
             {
                 Id = 2,
-                Name = "Second Order",
                 OrderNo = "OR453324",
                 Delivered = true,
                 DeliveredAt = DateTime.Now.AddDays(15),
