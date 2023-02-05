@@ -15,6 +15,6 @@ public sealed class ProductsController : Controller
     {
         var viewModels = await processor.ProccessAsync(param);
         return this.JsonDefaultContract(viewModels);
-
     }
+
 }

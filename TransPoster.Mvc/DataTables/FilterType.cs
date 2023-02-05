@@ -8,7 +8,5 @@ public enum FilterType
     List,
     Date,
     DateRange,
-    Boolean,
-    Decimal,
-    Int
+    Boolean
 }

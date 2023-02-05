@@ -21,9 +21,9 @@ public sealed class ProductViewModelProccesser : RemoteProccesserBase<Product, P
     {
         Id = model.Id,
         Name = model.Name,
-        CreatedAt = model.CreatedAt,
-        UnitPrice = model.UnitPrice.ToString(),
-        Stock = model.Stock.ToString()
+        UnitPrice = model.UnitPrice,
+        Stock = model.Stock,
+        CreatedAt = model.CreatedAt
     };
 
 }
