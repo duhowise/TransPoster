@@ -12,7 +12,7 @@
             string hasSubMenu = menu.Children.Any() ? "has-submenu" : "";
             <li class="nav-item @hasSubMenu">
                 <a class="nav-link" data-active="@SetDataActive(menu.Url!)" href="@menu.Url">
-                    <i class="w-25 bi-people-fill"></i>
+                    <i class="w-25 bi-@menu.Icon"></i>
                     <span class="w-75 text-left">@menu.Name</span>
                     @if (!string.IsNullOrEmpty(hasSubMenu))
                     {

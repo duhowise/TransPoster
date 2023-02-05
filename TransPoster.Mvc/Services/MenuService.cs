@@ -28,7 +28,7 @@ public class MenuService : IMenuService
         new MenuParentModel()
         {
             Name = "Database",
-            Icon = "person-badge-fill",
+            Icon = "database-fill",
             Url = "#",
             Children = new ()
             {
