@@ -1,8 +1,12 @@
-﻿namespace TransPoster.Data.Models;
+﻿using TransPoster.Data.Interfaces;
 
-public class Order
+namespace TransPoster.Data.Models;
+
+public class Order : IIdName
 {
     public int Id { get; set; }
+    public string Name { get; set; }
+
     public string OrderNo { get; set; }
     public decimal Total { get; set; }
     public bool Delivered { get; set; }
