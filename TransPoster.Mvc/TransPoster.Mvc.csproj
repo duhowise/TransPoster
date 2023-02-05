@@ -11,6 +11,7 @@
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
   <ItemGroup>
     <PackageReference Include="AspNetCore.ReCaptcha" Version="1.6.0" />
+    <PackageReference Include="Enums.NET" Version="4.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="7.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.2" />
@@ -27,7 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Extensions\" />
     <Folder Include="Models\Menu\" />
     <Folder Include="Views\Roles\" />
   </ItemGroup>
@@ -35,5 +35,13 @@
   <ItemGroup>
     <None Remove="Views\Roles\" />
     <None Remove="Quartz" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Products\Index.cshtml" />
+    <None Include="wwwroot\js\dataTables\datatables.render.js" />
+    <None Include="wwwroot\lib\bootstrap-multiselect\bootstrap-multiselect.js" />
+    <None Include="wwwroot\lib\moment\moment-he.js" />
+    <None Include="wwwroot\lib\moment\moment.js" />
   </ItemGroup>
 </Project>
