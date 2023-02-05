@@ -18,12 +18,12 @@ public sealed class ProductViewModel
     public string Name { get; set; } = null!;
 
     [Display(Name = "Unit Price")]
-    [ColumnSettings(FilterType = FilterType.Decimal)]
+    [ColumnSettings(FilterType = FilterType.Text)]
     [SourceField]
     public decimal UnitPrice { get; set; }
 
     [Display(Name = "Stock")]
-    [ColumnSettings(FilterType = FilterType.Int)]
+    [ColumnSettings(FilterType = FilterType.Text)]
     [SourceField]
     public int Stock { get; set; }
 
