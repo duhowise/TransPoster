@@ -22,9 +22,6 @@ public class UserService : IUserService
 
     public async Task<ApplicationUser> CreateUserAsync(CreateUserModel body)
     {
-        var role = await _roleService.FindByName(body.Role);
-        if (role is null) throw new Exception("Role does not exist");
-
         var user = new ApplicationUser
         {
             UserName = body.UserName,
@@ -33,7 +30,12 @@ public class UserService : IUserService
 
         var result = await _userManager.CreateAsync(user, body.Password);
 
-        if (result.Succeeded) return user;
+        if (result.Succeeded)
+        {
+            await _userManager.AddToRoleAsync(user, body.Role);
+            await _userManager.UpdateSecurityStampAsync(user);
+            return user;
+        }
 
         var error = result.Errors.ToList().First();
         throw new Exception(error.Description);
@@ -42,8 +44,7 @@ public class UserService : IUserService
     public async Task AddRoleToUser(AddRoleToUserModel body)
     {
         var user = await _userManager.FindByIdAsync(body.UserId);
-
-        await _userManager.AddToRoleAsync(user, body.Role);
+        await _userManager.AddToRoleAsync(user!, body.Role);
     }
 
     public async Task RemoveRoleFromUserAsync(RemoveRoleFromUserModel body)
@@ -52,4 +53,5 @@ public class UserService : IUserService
 
         await _userManager.RemoveFromRoleAsync(user, body.Role);
     }
+    public async Task<ApplicationUser?> FindByIdAsync(string id) => await _userManager.Users.Include(_ => _.Roles).FirstOrDefaultAsync(_ => _.Id ==  id);
 }

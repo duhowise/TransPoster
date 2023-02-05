@@ -30,11 +30,13 @@
   <ItemGroup>
     <Folder Include="Models\Menu\" />
     <Folder Include="Views\Roles\" />
+    <Folder Include="Views\Users\" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="Views\Roles\" />
     <None Remove="Quartz" />
+    <None Remove="Views\Users\" />
   </ItemGroup>
 
   <ItemGroup>
