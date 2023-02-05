@@ -1,6 +1,8 @@
-﻿namespace TransPoster.Data.Models;
+﻿using TransPoster.Data.Interfaces;
 
-public class Product
+namespace TransPoster.Data.Models;
+
+public class Product : IIdName
 {
     public int Id { get; set; }
     public string Name { get; set; }
