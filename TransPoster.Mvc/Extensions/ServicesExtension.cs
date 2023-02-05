@@ -1,4 +1,5 @@
-﻿using TransPoster.Mvc.Services;
+﻿using TransPoster.Mvc.Data.Products;
+using TransPoster.Mvc.Services;
 
 namespace TransPoster.Mvc.Extensions;
 
@@ -12,6 +13,7 @@ public static class ServicesExtension
         services.AddTransient<IDbManagementService, DbManagementService>();
         services.AddTransient<IMenuService, MenuService>();
         services.AddTransient(typeof(IDbModelsService<>), typeof(DbModelsService<>));
+        services.AddTransient(typeof(ProductViewModelProccesser));
 
         return services;
     }

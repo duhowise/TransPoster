@@ -24,6 +24,7 @@
         $(function(){
             const tableElem = $('#products-table');
             const columns = getColumnsFromDataTable(tableElem);
+            console.log(columns, 'table columns');
             const dataTable = tableElem.DataTable({
                 serverSide: true,
                 ajax: {
