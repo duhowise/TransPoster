@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TransPoster.Data;
-using TransPoster.Data.Models;
+using TransPoster.Data.Identity;
 
 namespace TransPoster.Mvc.Services;
 

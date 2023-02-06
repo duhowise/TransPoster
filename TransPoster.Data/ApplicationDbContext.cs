@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using TransPoster.Data.Identity;
 using TransPoster.Data.Models;
 
 namespace TransPoster.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityRole, string>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, UserIdentityRole, string, UserIdentityUserClaim, UserIdentityUserRole, UserIdentityUserLogin, UserIdentityRoleClaim, UserIdentityUserToken>
+
     {
         public DbSet<UserHistory> UserHistories { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }

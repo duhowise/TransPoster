@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using TransPoster.Data.Models;
+using TransPoster.Data.Identity;
 
 namespace TransPoster.Data.Configurations;
 

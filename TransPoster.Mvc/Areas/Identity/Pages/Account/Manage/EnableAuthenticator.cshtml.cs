@@ -9,7 +9,7 @@ using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using TransPoster.Data.Models;
+using TransPoster.Data.Identity;
 
 namespace TransPoster.Mvc.Areas.Identity.Pages.Account.Manage
 {

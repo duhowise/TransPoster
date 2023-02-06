@@ -1,4 +1,6 @@
-﻿namespace TransPoster.Data.Models;
+﻿using TransPoster.Data.Identity;
+
+namespace TransPoster.Data.Models;
 
 public class UserHistory
 {

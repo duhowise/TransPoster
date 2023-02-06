@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using TransPoster.Data.Models;
+using TransPoster.Data.Identity;
 
 namespace TransPoster.Mvc.Validators.Auth;
 

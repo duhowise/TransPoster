@@ -1,4 +1,4 @@
-﻿using TransPoster.Data.Models;
+﻿using TransPoster.Data.Identity;
 using TransPoster.Mvc.Models.Users;
 
 namespace TransPoster.Mvc.Services;
@@ -10,9 +10,4 @@ public interface IUserService
     public Task<ApplicationUser> CreateUserAsync(CreateUserModel body);
 
     public Task AddRoleToUser(AddRoleToUserModel body);
-
-    public Task RemoveRoleFromUserAsync(RemoveRoleFromUserModel body);
-    Task<ApplicationUser?> FindByIdAsync(string id);
-
-    public Task DeleteUserAsync(string id);
 }

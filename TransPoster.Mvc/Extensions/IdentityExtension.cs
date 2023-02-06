@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using TransPoster.Data;
-using TransPoster.Data.Models;
+using TransPoster.Data.Identity;
 using TransPoster.Mvc.Validators.Auth;
 
 namespace TransPoster.Mvc.Extensions;
