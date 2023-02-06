@@ -1,10 +1,19 @@
-﻿using TransPoster.Mvc.Models.Menu;
+﻿using TransPoster.Data;
+using TransPoster.Mvc.Models.Menu;
 
 namespace TransPoster.Mvc.Services;
 
-public class MenuService : IMenuService
+public sealed class MenuService : IMenuService
 {
-    private readonly List<MenuParentModel> _menu = new()
+    private readonly ApplicationDbContext db;
+
+    public MenuService(ApplicationDbContext db)
+    {
+        this.db = db ?? throw new ArgumentNullException(nameof(db));
+    }
+
+
+    public List<MenuParentModel> GetMenuList() => new()
     {
         new MenuParentModel()
         {
@@ -30,19 +39,18 @@ public class MenuService : IMenuService
             Name = "Database",
             Icon = "person-badge-fill",
             Url = "#",
-            Children = new ()
+            Children = GetDbContextTypes().Select(name => new MenuChildModel
             {
-                new MenuChildModel()
-                {
-                    Name = "Products",
-                    Url = "/Products"
-                },
-            }
+                Name = name,
+                Url= "DbExplorer/" + name,
+            }).ToList()
         }
     };
 
-    public List<MenuParentModel> GetMenuList()
+    private IReadOnlyList<string> GetDbContextTypes()
     {
-        return _menu;
+        // TODO: test it
+        return db.Model.GetEntityTypes().Select(et => et.Name).ToList();
     }
+
 }

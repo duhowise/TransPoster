@@ -1,36 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using TransPoster.Data.Models;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using TransPoster.Data;
+using TransPoster.Mvc.DataTables;
+using TransPoster.Mvc.DataTables.Model;
+using TransPoster.Mvc.Mvc;
 
-namespace TransPoster.Mvc.Controllers
+namespace TransPoster.Mvc.Controllers;
+
+[AllowAnonymous]
+public sealed class DbExplorerController : Controller
 {
-    public class DbExplorerController : Controller
+    public ViewResult Index(string typeName) => View();
+
+    public async Task<JsonResult> IndexTable(string typeName, AjaxDataRequest param, [FromServices] ApplicationDbContext db)
     {
-        private readonly IConfiguration _config;
-        public DbExplorerController(IConfiguration config) => _config = config;
-
-        //[HttpPost]
-        //public IActionResult Products()
-        //{
-        //    using var db = new Database("sqlserver", _config.GetConnectionString("DefaultConnection"), "Microsoft.Data.SqlClient");
-
-        //    var response = new Editor(db, "Products")
-        //        .Model<Product>()
-        //        .Process(Request.Form)
-        //        .Data();
-
-        //    return Json(response);
-        //}
-
-        //public IActionResult Orders()
-        //{
-        //    using var db = new Database("sqlserver", _config.GetConnectionString("DefaultConnection"), "Microsoft.Data.SqlClient");
-
-        //    var response = new Editor(db, "Orders")
-        //        .Model<Order>()
-        //        .Process(Request.Form)
-        //        .Data();
-
-        //    return Json(response);
-        //}
+        var proccesser = new DbSetProccesser(db);
+        var viewModels = await proccesser.ProccessAsync(typeName, param);
+        return this.JsonDefaultContract(viewModels);
     }
+
 }
