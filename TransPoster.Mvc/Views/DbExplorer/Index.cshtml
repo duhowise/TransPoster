@@ -1,13 +1,40 @@
-﻿@{
+﻿@inject TransPoster.Data.ApplicationDbContext db
+
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var typeName = Context.Request.Query["typeName"];
+    var properties = db.Model.FindEntityType(typeName!)!.GetDeclaredProperties();
 }
 
 <h1>Products</h1>
 <div class="container-fluid">
-    <table model-type="typeof(TransPoster.Mvc.Data.Products.ProductViewModel)"
-           add-first-column="false"
-           class="table table-striped table-bordered table-hover dataTable"
-           id="products-table"></table>
+   
+    <table id="db-table">
+        <thead>
+
+            @*title row*@
+            <tr>
+                @foreach(var prop in properties)
+                {
+                    // TODO:
+                    <th>@prop.Name</th>
+                }
+            </tr>
+
+            @*filters row*@
+            <tr>
+                @foreach (var prop in properties)
+                {
+                    // TODO:
+                    <th data-dt-filter></th>
+                }
+            </tr>
+        </thead>
+
+        <tbody>
+        </tbody>
+    </table>
+
 </div>
 
 @section Styles{
@@ -22,7 +49,7 @@
     <script>
 
         $(function(){
-            const tableElem = $('#products-table');
+            const tableElem = $('#db-table');
             const columns = getColumnsFromDataTable(tableElem);
             console.log(columns, 'table columns');
             const dataTable = tableElem.DataTable({
