@@ -14,10 +14,13 @@ namespace TransPoster.Mvc.Controllers
     {
         private readonly IUserService _userService;
         private readonly IRoleService _roleService;
-        public UsersController(IUserService userService, IRoleService roleService)
+        private readonly ILogger<UsersController> _logger;
+
+        public UsersController(IUserService userService, IRoleService roleService, ILogger<UsersController> logger)
         {
             _userService = userService;
             _roleService = roleService;
+            _logger = logger;
         }
 
         public async Task<IActionResult> Index()
@@ -35,11 +38,11 @@ namespace TransPoster.Mvc.Controllers
         {
             var user = await _userService.FindByIdAsync(id);
             if (user is null) return NotFound();
-            // var role = await _roleService.GetIdentityRoleAsync(user.Roles.FirstOrDefault()!.Id);
+
             return View(new EditUserModel
             {
                 Email = user.Email!,
-                Role = "Member",
+                Role = user.Roles.FirstOrDefault()?.Name!,
                 UserName = user.UserName!,
             });
         }

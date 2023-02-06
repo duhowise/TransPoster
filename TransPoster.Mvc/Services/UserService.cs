@@ -18,7 +18,8 @@ public class UserService : IUserService
         _roleService = roleService;
     }
 
-    public async Task<IEnumerable<ApplicationUser>> FindAllUsersAsync() => await _userManager.Users.Where(u => u.IsActive).Include(u => u.Roles).ToListAsync();
+    public async Task<IEnumerable<ApplicationUser>> FindAllUsersAsync() =>
+        await _userManager.Users.Where(u => u.IsActive).Include(u => u.Roles).ToListAsync();
 
     public async Task<ApplicationUser> CreateUserAsync(CreateUserModel body)
     {
@@ -55,7 +56,27 @@ public class UserService : IUserService
 
         await _userManager.RemoveFromRoleAsync(user, body.Role);
     }
-    public async Task<ApplicationUser?> FindByIdAsync(string id) => await _userManager.Users.Include(_ => _.Roles).FirstOrDefaultAsync(_ => _.Id == id);
+
+    public async Task<ApplicationUser?> FindByIdAsync(string id)
+    {
+        var user = await _userManager.Users.FirstOrDefaultAsync(_ => _.Id == id);
+
+        if (user is null) throw new Exception("User not found!");
+
+        var roles = await _roleService.FindAllAsync();
+        List<IdentityRole> userRoles = new();
+
+        foreach (var role in roles)
+        {
+            var isRole = await _userManager.IsInRoleAsync(user, role.Name!);
+
+            if (isRole) userRoles.Add(role);
+        }
+
+        user.Roles = userRoles;
+
+        return user;
+    }
 
     public async Task DeleteUserAsync(string id)
     {
