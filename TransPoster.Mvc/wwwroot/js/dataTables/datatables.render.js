@@ -11,6 +11,7 @@ function getColumnsFromDataTable(selector, renders) {
         //.filter((ix, th) => $(th).data('column-name'))
         .map((ix, th) => {
             const th$ = $(th);
+            console.log(th$);
             const name = th$.data('column-name') || null;
             const clmn = {
                 name: name,

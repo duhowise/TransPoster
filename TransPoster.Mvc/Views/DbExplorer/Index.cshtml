@@ -3,7 +3,8 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     var typeName = Context.Request.Query["typeName"];
-    var properties = db.Model.FindEntityType(typeName!)!.GetDeclaredProperties();
+    var declaringType = Type.GetType(typeName, throwOnError: false);
+    var properties = db.Model.FindEntityType(declaringType.FullName)!.GetDeclaredProperties();
 }
 
 <h1>Products</h1>
@@ -13,22 +14,22 @@
         <thead>
 
             @*title row*@
-            <tr>
+            <tr data-dt-title>
                 @foreach(var prop in properties)
                 {
                     // TODO:
-                    <th>@prop.Name</th>
+                    <th data-column-name>@prop.Name</th>
                 }
             </tr>
 
             @*filters row*@
-            <tr>
-                @foreach (var prop in properties)
-                {
-                    // TODO:
-                    <th data-dt-filter></th>
-                }
-            </tr>
+             <tr>
+                 @foreach (var prop in properties)
+                 {
+                     // TODO:
+                     <th data-dt-filter></th>
+                 }
+             </tr>
         </thead>
 
         <tbody>
@@ -55,7 +56,7 @@
             const dataTable = tableElem.DataTable({
                 serverSide: true,
                 ajax: {
-                    url: '@Url.Action("IndexTable")',
+                    url: '@Url.Action(@"IndexTable", "DbExplorer", new { typeName  })',
                     type: "POST"
                 },
                 columns: columns

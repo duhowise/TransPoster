@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Reflection;
+using Microsoft.EntityFrameworkCore;
 using TransPoster.Mvc.DataTables.Helpers;
 using TransPoster.Mvc.DataTables.Model;
 
@@ -20,8 +21,24 @@ public sealed class DbSetProccesser
 
     public async Task<AjaxData> ProccessAsync(string typeName, AjaxDataRequest dataRequest)
     {
-        // TODO: use Reflection to create closed generic version of the DbSetProccesser
-        throw new NotImplementedException();
+        try
+        {
+            var declaringType = Type.GetType(typeName, throwOnError: false);
+            var dbsetProcessor = typeof(DbSetProccesser<>).MakeGenericType(declaringType);
+            var dbset = db.GetType().GetProperty(declaringType.Name).GetValue(db);
+            
+            var dbProcessorInstance = Activator.CreateInstance(dbsetProcessor);
+            var task = (Task)dbProcessorInstance.GetType().GetMethod("ProccessAsync", new Type[] { dbset.GetType(), dataRequest.GetType() })
+                .Invoke(dbProcessorInstance, new []{ dbset, dataRequest });
+            await task.ConfigureAwait(false);
+            var resultProperty = task.GetType().GetProperty("Result");
+            return (AjaxData)resultProperty.GetValue(task);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
 
 }

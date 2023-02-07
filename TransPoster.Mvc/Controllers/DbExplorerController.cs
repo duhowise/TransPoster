@@ -10,7 +10,7 @@ namespace TransPoster.Mvc.Controllers;
 [AllowAnonymous]
 public sealed class DbExplorerController : Controller
 {
-    public ViewResult Index(string typeName) => View();
+    public ViewResult Index([FromQuery]string typeName ) => View();
 
     public async Task<JsonResult> IndexTable(string typeName, AjaxDataRequest param, [FromServices] ApplicationDbContext db)
     {

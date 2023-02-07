@@ -1,4 +1,5 @@
-﻿using TransPoster.Data;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
+using TransPoster.Data;
 using TransPoster.Mvc.Models.Menu;
 
 namespace TransPoster.Mvc.Services;
@@ -39,18 +40,19 @@ public sealed class MenuService : IMenuService
             Name = "Database",
             Icon = "person-badge-fill",
             Url = "#",
-            Children = GetDbContextTypes().Select(name => new MenuChildModel
+            Children = GetDbContextTypes()
+                .Select(type => new MenuChildModel
             {
-                Name = name,
-                Url= "DbExplorer/" + name,
+                Name = type.ShortName(),
+                Url= $@"/DbExplorer?typeName={type.ClrType.AssemblyQualifiedName}",
             }).ToList()
         }
     };
 
-    private IReadOnlyList<string> GetDbContextTypes()
+    private IReadOnlyList<IEntityType> GetDbContextTypes()
     {
         // TODO: test it
-        return db.Model.GetEntityTypes().Select(et => et.Name).ToList();
+        return db.Model.GetEntityTypes().ToList();
     }
-
+    
 }
