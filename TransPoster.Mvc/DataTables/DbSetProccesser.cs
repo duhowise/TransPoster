@@ -1,7 +1,9 @@
 ﻿using System.Reflection;
 using Microsoft.EntityFrameworkCore;
+using TransPoster.Data.Models;
 using TransPoster.Mvc.DataTables.Helpers;
 using TransPoster.Mvc.DataTables.Model;
+using TransPoster.Mvc.Extensions;
 
 namespace TransPoster.Mvc.DataTables;
 
@@ -24,15 +26,17 @@ public sealed class DbSetProccesser
         try
         {
             var declaringType = Type.GetType(typeName, throwOnError: false);
-            var dbsetProcessor = typeof(DbSetProccesser<>).MakeGenericType(declaringType);
-            var dbset = db.GetType().GetProperty(declaringType.Name).GetValue(db);
-            
-            var dbProcessorInstance = Activator.CreateInstance(dbsetProcessor);
-            var task = (Task)dbProcessorInstance.GetType().GetMethod("ProccessAsync", new Type[] { dbset.GetType(), dataRequest.GetType() })
-                .Invoke(dbProcessorInstance, new []{ dbset, dataRequest });
-            await task.ConfigureAwait(false);
-            var resultProperty = task.GetType().GetProperty("Result");
-            return (AjaxData)resultProperty.GetValue(task);
+            MethodInfo setMethod = db.GetType().GetMethod("Set")
+                .MakeGenericMethod(declaringType);
+            object dbSet = setMethod.Invoke(db, null);
+
+            var queryable = dbSet.GetType().GetMethod("AsQueryable").Invoke(dbSet, null) as IQueryable<object>;
+
+            Type dbSetProccesserType = typeof(DbSetProccesser<>).MakeGenericType(declaringType);
+            object dbSetProccesser = Activator.CreateInstance(dbSetProccesserType);
+            MethodInfo proccessMethod = dbSetProccesserType.GetMethod("ProccessAsync", new Type[] { typeof(IQueryable<object>), typeof(AjaxDataRequest) });
+            AjaxData result = await (Task<AjaxData>)proccessMethod.Invoke(dbSetProccesser, new object[] { queryable, dataRequest });
+            return result;
         }
         catch (Exception e)
         {
